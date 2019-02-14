@@ -125,6 +125,14 @@ export default {
           size: 3,
         },
         {
+          name: '地图找工作',
+          href: 'https://lixuan.xyz/map/',
+          imgsrc: 'https://lixuan.xyz/x-images/job.map.jpg',
+          imgsrcLazy: 'https://lixuan.xyz/x-images/job.map.lazy.jpg',
+          description_html: '创办于2019-02-14',
+          size: 3,
+        },
+        {
           name: '数学之路',
           href: 'http://shuxue6.com/',
           imgsrc: 'https://lixuan.xyz/x-images/shuxue6.com.jpg',
