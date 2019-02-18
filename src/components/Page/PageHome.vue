@@ -126,7 +126,7 @@ export default {
         },
         {
           name: '地图找工作',
-          href: 'https://lixuan.xyz/map/',
+          href: 'https://lixuan.xyz/job/',
           imgsrc: 'https://lixuan.xyz/x-images/job.map.jpg',
           imgsrcLazy: 'https://lixuan.xyz/x-images/job.map.lazy.jpg',
           description_html: '创办于2019-02-14',
