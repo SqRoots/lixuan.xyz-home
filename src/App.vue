@@ -89,15 +89,6 @@ export default {
   },
   mounted() {
     this.getLoginQ();         // 判断是否登录
-
-    // 百度统计
-    let _hmt = _hmt || [];
-    (() => {
-      let hm = document.createElement('script');
-      hm.src = 'https://hm.baidu.com/hm.js?a704352b019633aaf7906532645c0d36';
-      const s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
   },
 };
 </script>
