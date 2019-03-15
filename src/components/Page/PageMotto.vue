@@ -76,11 +76,10 @@
         </v-icon>
       </v-flex>
 
-      <v-flex >
-        <!-- v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;" -->
+      <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;">
         <template>
           <v-card-title>
-            Nutrition
+            搜索
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
