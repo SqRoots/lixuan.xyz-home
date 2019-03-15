@@ -11,7 +11,7 @@
     </v-navigation-drawer>
 
     <!-- ■■■■■■■■ 主体内容 ■■■■■■■■ -->
-    <v-content>
+    <v-content style="padding-bottom: 0;">
       <v-container fluid>
         <router-view />
       </v-container>
@@ -140,5 +140,4 @@ export default {
     width: 100%;
     height: 100%;
   }
-
 </style>

@@ -75,6 +75,39 @@
           fas fa-pen
         </v-icon>
       </v-flex>
+
+      <v-flex >
+        <!-- v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;" -->
+        <template>
+          <v-card-title>
+            Nutrition
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            :headers="headers"
+            :items="bodyData"
+            :search="search"
+            class="elevation-1"
+          >
+            <template v-slot:items="props">
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.user_id }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.visible }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.author }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.source }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.type }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.update_time }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" v-html="props.item.content_html"></td>
+            </template>
+          </v-data-table>
+        </template>
+      </v-flex>
     </v-layout>
     <!-- 删除项目 对话框 -->
     <x-dialog-delete-item
@@ -127,6 +160,17 @@ export default {
       valueEditItemDialog: false,        // 编辑对话框-显示隐藏
       dataEditDialog: {},                // 编辑对话框-数据
       queryResult: '',                   // 查询结果
+
+      search: '',
+      headers: [
+          { text: 'user_id',  value: 'user_id', align: 'center'},
+          { text: 'visible', value: 'visible' ,align: 'center'},
+          { text: 'author', value: 'author' ,align: 'center'},
+          { text: 'source', value: 'source' ,align: 'center'},
+          { text: 'type', value: 'type' ,align: 'center'},
+          { text: 'update_time', value: 'update_time' ,align: 'center'},
+          { text: 'content_html', value: 'content_html' ,align: 'center', sortable: false}
+        ],
     };
   },
   methods: {
@@ -165,6 +209,7 @@ export default {
       .then((response) => {
         this.bodyData = response.data.data;                  // 项目数据
         this.$_randomChoiceOneData();                             // 生成页面数据
+        // console.log(this.bodyData);
       });
     },
     $_randomChoiceOneData() {
@@ -178,10 +223,12 @@ export default {
       }
       return [this.$route.query.category];                // 返回URL中的类别
     },
+
   },
   mounted() {                                             // 自成视图后自加载数据
     this.$_getBodyData(this.$route.name);
   },
+
 };
 </script>
 
@@ -201,5 +248,9 @@ h1 {
 }
 .flex.main-content {
   height: 280px;
+}
+
+.theme--light.v-table{
+  background-color: rgba(255,255,255,0.5);
 }
 </style>

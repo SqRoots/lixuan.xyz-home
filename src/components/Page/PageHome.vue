@@ -132,14 +132,14 @@ export default {
           description_html: '创办于2019-02-14',
           size: 3,
         },
-        {
-          name: '数学之路',
-          href: 'http://shuxue6.com/',
-          imgsrc: 'https://lixuan.xyz/x-images/shuxue6.com.jpg',
-          imgsrcLazy: 'https://lixuan.xyz/x-images/shuxue6.com.lazy.jpg',
-          description_html: '创办于2011年，已经不再维护',
-          size: 3,
-        },
+        // {
+        //   name: '数学之路',
+        //   href: 'http://shuxue6.com/',
+        //   imgsrc: 'https://lixuan.xyz/x-images/shuxue6.com.jpg',
+        //   imgsrcLazy: 'https://lixuan.xyz/x-images/shuxue6.com.lazy.jpg',
+        //   description_html: '创办于2011年，已经不再维护',
+        //   size: 3,
+        // },
       ],
     };
   },
