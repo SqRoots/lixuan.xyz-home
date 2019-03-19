@@ -140,4 +140,47 @@ export default {
     width: 100%;
     height: 100%;
   }
+
+  /* ■■■■■■■■ Motto 数据表 ■■■■■■■■ */
+  /* 数据表-数据-背景 */
+  .v-table__overflow .theme--light.v-table,
+  .v-table__overflow .theme--light.v-list{
+    background-color: rgba(255,255,255,0.2);
+  }
+  table.v-table thead td:not(:nth-child(1)),
+  table.v-table tbody td:not(:nth-child(1)),
+  table.v-table thead th:not(:nth-child(1)),
+  table.v-table tbody th:not(:nth-child(1)),
+  table.v-table thead td:first-child,
+  table.v-table tbody td:first-child,
+  table.v-table thead th:first-child,
+  table.v-table tbody th:first-child{
+    padding: 5px;
+  }
+  /* 数据表-标题行 */
+  .v-table__overflow .theme--light.v-table thead{
+    background-color: rgba(255,255,255,0.3);
+    font-weight: bold;
+  }
+  /* 数据表-尾-操作 */
+  .theme--light.v-datatable .v-datatable__actions{
+    background-color: rgba(255,255,255,0.3);
+    font-weight: bold;
+  }
+  .theme--light.v-table.v-datatable{
+    background-color: rgba(0,0,0,0);
+  }
+  /* 数据表-尾-操作-每页显示行数 */
+  .v-menu__content.theme--light.v-menu__content--auto.menuable__content__active{
+    overflow-y: hidden;
+  }
+  /* 数据表-尾-操作-每页显示行数 */
+  .v-select-list.v-card.theme--light .v-list__tile__content .v-list__tile__title{
+    text-align: center;
+  }
+  /* 数据表-分页 */
+  .theme--light.v-pagination .v-pagination__item{
+    background-color: rgba(255,255,255,0.3);
+  }
+
 </style>

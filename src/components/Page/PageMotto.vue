@@ -14,8 +14,8 @@
       <v-divider />
 
       <v-flex class="main-content">
-        <h2>{{ randomOneData.source }}</h2>
-        <h4>{{ randomOneData.author }}</h4>
+        <h2>{{ randomOneData.source||'出处不详' }}</h2>
+        <h4>{{ randomOneData.author||'佚名' }}</h4>
         <br>
         <div
           class="subheading"
@@ -76,10 +76,11 @@
         </v-icon>
       </v-flex>
 
-      <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;">
+      <!-- <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"> -->
+      <v-flex>
         <template>
           <v-card-title>
-            搜索
+            <v-spacer></v-spacer>
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
@@ -93,18 +94,21 @@
             :headers="headers"
             :items="bodyData"
             :search="search"
+            :pagination.sync="pagination"
             class="elevation-1"
           >
             <template v-slot:items="props">
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.user_id }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.visible }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.author }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.source }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.type }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)">{{ props.item.update_time }}</td>
-              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" v-html="props.item.content_html"></td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:100px">{{ props.item.visible }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:160px">{{ props.item.author }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:160px">{{ props.item.source }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:160px">{{ props.item.type }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:100px">{{ props.item.update_time }}</td>
+              <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:520px" v-html="props.item.content_html"></td>
             </template>
           </v-data-table>
+          <div class="text-xs-center pt-2">
+            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+          </div>
         </template>
       </v-flex>
     </v-layout>
@@ -160,9 +164,15 @@ export default {
       dataEditDialog: {},                // 编辑对话框-数据
       queryResult: '',                   // 查询结果
 
+      pagination: {
+        descending: false,
+        page: 5,
+        rowsPerPage: 10, // -1 for All
+        sortBy: '',
+        totalItems: 50,
+      },
       search: '',
       headers: [
-          { text: 'user_id',  value: 'user_id', align: 'center'},
           { text: 'visible', value: 'visible' ,align: 'center'},
           { text: 'author', value: 'author' ,align: 'center'},
           { text: 'source', value: 'source' ,align: 'center'},
@@ -173,11 +183,14 @@ export default {
     };
   },
   methods: {
-    $_ShowDeleteDialog(data) {        // 显示删除项目对话框
+    // 显示删除项目对话框
+    $_ShowDeleteDialog(data) {
       this.dataDeleteDialog = data;
       this.valueDeleteItemDialog = true;
     },
-    $_reflashDeleteItem(data) {         // 删除项目成功时，也将其从页面中删除
+
+    // 删除项目成功时，也将其从页面中删除
+    $_reflashDeleteItem(data) {
       let index = -1;
       this.bodyData.forEach((v, i) => {
         if (v.id === data.id) index = i;
@@ -188,7 +201,9 @@ export default {
     $_ShowCreateDialog() {
       this.valueCreateItemDialog = true;
     },
-    $_reflashCreateItem(data) {         // 删除项目成功时，也将其从页面中删除
+
+    // 删除项目成功时，也将其从页面中删除
+    $_reflashCreateItem(data) {
       this.bodyData.push(data);
       this.randomOneData = data;
     },
@@ -196,18 +211,23 @@ export default {
       this.valueEditItemDialog = true;
       this.dataEditDialog = data;
     },
-    $_reflashEditItem(data) {                              // 编辑项目成功时，也将其从页面中更新
+
+    // 编辑项目成功时，也将其从页面中更新
+    $_reflashEditItem(data) {
       this.bodyData.forEach((v, i) => {
         if (v.id === data.id) this.bodyData[i] = data;
       });
       this.randomOneData = data;
     },
-    $_getBodyData(routerName) {                               // 从服务器获取数据
+
+    // 从服务器获取数据
+    $_getBodyData(routerName) {
       axios
       .get(APIURL.GetDataURL, { params: { catalog: routerName } })
       .then((response) => {
         this.bodyData = response.data.data;                  // 项目数据
-        this.$_randomChoiceOneData();                             // 生成页面数据
+        this.$_randomChoiceOneData();                        // 生成页面数据
+        this.pagination.totalItems = response.data.data.length;
         // console.log(this.bodyData);
       });
     },
@@ -216,7 +236,9 @@ export default {
       const randomIndex = parseInt(Math.random() * dataLength, 10);
       this.randomOneData = this.bodyData[randomIndex];
     },
-    $_filterSection(data) {                               // 根据URL中的参数过滤类别
+
+    // 根据URL中的参数过滤类别
+    $_filterSection(data) {
       if (!this.$route.query.category) {
         return data;                                      // 返回所有类别
       }
@@ -224,10 +246,22 @@ export default {
     },
 
   },
-  mounted() {                                             // 自成视图后自加载数据
+
+   // 自成视图后自加载数据
+  mounted() {
     this.$_getBodyData(this.$route.name);
   },
 
+   // 分页
+  computed: {
+    pages () {
+      if (this.pagination.rowsPerPage == null ||
+        this.pagination.totalItems == null
+      ) return 0
+
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+    }
+  }
 };
 </script>
 
@@ -249,7 +283,4 @@ h1 {
   height: 280px;
 }
 
-.theme--light.v-table{
-  background-color: rgba(255,255,255,0.5);
-}
 </style>
