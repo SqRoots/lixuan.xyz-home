@@ -40,7 +40,7 @@
       fab
       v-show="miniVariant"
       :target="$cookies.get('login')==='login'?'_blank':'_self'"
-      :href="`https://lixuan.xyz/blog/wp-login.php?redirect_to=${currentURL()}`"
+      :href="`https://lixuan.xyz/blog/wp-login.php?${currentURL()}`"
     >
       <v-icon v-html="$cookies.get('login')==='login'?'fas fa-sign-out-alt':'fas fa-sign-in-alt'" />
     </v-btn>
@@ -77,14 +77,14 @@ export default {
       const category = this.$route.query.category || '';
       if (this.$cookies.get('login') === 'login') {
         if (category === '') {
-          return `${this.$route.path}?category=${category}&loggedout=true`;
+          return `loggedout=true&redirect_to=${this.$route.path}`;
         }
-        return `${this.$route.path}?loggedout=true`;
+        return `loggedout=true&redirect_to=${this.$route.path}%3Fcategory=${category}`;
       }
       if (category === '') {
-        return `${this.$route.path}`;
+        return `redirect_to=${this.$route.path}`;
       }
-      return `${this.$route.path}?category=${category}`;
+      return `redirect_to=${this.$route.path}%3Fcategory=${category}`;
     },
   },
   mounted() {

@@ -76,8 +76,8 @@
         </v-icon>
       </v-flex>
 
-      <!-- <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"> -->
-      <v-flex>
+      <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;">
+      <!-- <v-flex> -->
         <template>
           <v-card-title>
             <v-spacer></v-spacer>
