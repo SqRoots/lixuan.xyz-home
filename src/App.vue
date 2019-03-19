@@ -39,7 +39,7 @@
       left
       fab
       v-show="miniVariant"
-      :target="$cookies.get('login')==='login'?'_blank':'_self'"
+      :target="loginQ"
       :href="`https://lixuan.xyz/blog/wp-login.php?${currentURL()}`"
     >
       <v-icon v-html="$cookies.get('login')==='login'?'fas fa-sign-out-alt':'fas fa-sign-in-alt'" />
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       miniVariant: true,
+      loginQ: $cookies.get('login')==='login'?'_blank':'_self',
     };
   },
   methods: {
@@ -77,9 +78,9 @@ export default {
       const category = this.$route.query.category || '';
       if (this.$cookies.get('login') === 'login') {
         if (category === '') {
-          return `loggedout=true&redirect_to=${this.$route.path}`;
+          return `action=logout&redirect_to=${this.$route.path}`;
         }
-        return `loggedout=true&redirect_to=${this.$route.path}%3Fcategory=${category}`;
+        return `action=logout&redirect_to=${this.$route.path}%3Fcategory=${category}`;
       }
       if (category === '') {
         return `redirect_to=${this.$route.path}`;
@@ -89,6 +90,12 @@ export default {
   },
   mounted() {
     this.getLoginQ();         // 判断是否登录
+  },
+  watch: {
+    // 更新登录状态
+    $cookies: function(val, oldVal) {
+      this.loginQ=this.$cookies.get('login')==='login'?'_blank':'_self';
+    },
   },
 };
 </script>
@@ -167,7 +174,7 @@ export default {
     background-color: rgba(255,255,255,0.3);
     font-weight: bold;
   }
-  .theme--light.v-table.v-datatable{
+  .theme--light.v-datatable .v-datatable__actions{
     background-color: rgba(0,0,0,0);
   }
   /* 数据表-尾-操作-每页显示行数 */
