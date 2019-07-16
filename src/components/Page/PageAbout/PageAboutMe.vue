@@ -240,7 +240,18 @@ export default {
       ],
       infomation: [
         {
-          date: '2016-04 ~ 今',
+          date: '2019-04 ~ 今',
+          title: '便利蜂',
+          url: 'https://www.bianlifeng.com/',
+          color: 'pink',
+          icon: 'fas fa-building',
+          content: [
+            '<b>职位</b>： 数据分析师',
+            '<b>部门</b>： 店务智能决策部',
+          ],
+        },
+		{
+          date: '2016-04 ~ 2019-04',
           title: '北京中彩在线',
           url: 'http://www.clo.com.cn/',
           color: 'cyan',
