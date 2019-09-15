@@ -44,6 +44,13 @@ const NavigationBodyData = [
     ],
   },
   {
+    text: '下载',
+    routerName: 'Download',
+    model: false,
+    icon: 'fa-download',
+    children: [],
+  },
+  {
     text: '格言',
     routerName: 'Motto',
     model: false,

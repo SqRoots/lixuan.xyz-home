@@ -61,6 +61,7 @@
             class="mx-3 brown--text"
             icon
             target="_blank"
+            href="http://www.beian.miit.gov.cn/"
           >
             <v-icon size="16px">
               fas fa-shield-alt

@@ -34,6 +34,11 @@ export default new Router({
       component: () => import("./views/Software.vue"),
     },
     {
+      path: '/download.html',
+      name: 'Download',
+      component: () => import("./views/Download.vue"),
+    },
+    {
       path: '/motto.html',
       name: 'Motto',
       component: () => import("./views/Motto.vue"),
