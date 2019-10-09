@@ -90,6 +90,18 @@ export default {
       valueShowDialog: false,
       valueShowResultDialog: false,
       queryResult: '',
+      formData: {
+        name: '',
+        name_cn: '',
+        url: '',
+        slogan: '',
+        establisher: '',
+        category: '',
+        type: '',
+        order: '',
+        visible: true,
+        description_html: '',
+      },
     };
   },
   methods: {
@@ -99,7 +111,7 @@ export default {
       .get(APIURL.DeleteItemURL, { params: { id: itemID, catalog: this.$route.name } })
       .then((response) => {
         this.queryResult = response.data;
-        if (response.data.substring(0, 5) !== '【未登录】') this.$emit('eSucceed', itemID);    // 如果成功，更新当前页面中的数据
+        if (response.data.substring(0, 5) !== '【未登录】') this.$emit('eSucceed', formData);    // 如果成功，更新当前页面中的数据
       });
       this.valueShowDialog = false;
       this.valueShowResultDialog = true;
@@ -118,6 +130,9 @@ export default {
       if (val === false) {
         this.$emit('eHideDialog');
       }
+    },
+    dData(val) {
+      this.formData.category = val.category;
     },
   },
 };

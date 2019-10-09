@@ -21,11 +21,14 @@ if ( is_user_logged_in() ) {
       case 'Motto':
           $table = 'motto';
           break;
+      case 'Download':
+          $table = 'download';
+          break;
   }
   $db = new SQLite3('collection.sqlite3');
 
   if ($table != 'motto') {
-    echo $table;
+    //echo $table;
     // 网站，数据，软件
     $stmt = $db->prepare("
     insert into {$table}

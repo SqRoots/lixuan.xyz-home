@@ -87,12 +87,8 @@
 </template>
 
 <script>
-// import mmaJPG from '@/assets/images/mma.ooo.jpg';
-// import lixJPG from '@/assets/images/lixuan.xyz.jpg';
-// import shuxue6JPG from '@/assets/images/shuxue6.com.jpg';
-// import mmaJPGLazy from '@/assets/images/mma.ooo.lazy.jpg';
-// import lixJPGLazy from '@/assets/images/lixuan.xyz.lazy.jpg';
-// import shuxue6JPGLazy from '@/assets/images/shuxue6.com.lazy.jpg';
+const axios = require('axios');
+
 import { plotCurves as PlotCurves, resizeCanvas as ResizeCanvas } from '@/assets/js/PlotCurve';
 
 export default {
@@ -100,46 +96,7 @@ export default {
   data() {
     return {
       myWeb: [
-        {
-          name: '我的博客',
-          href: 'https://lixuan.xyz/blog/',
-          imgsrc: 'https://lixuan.xyz/x-images/lixuan.xyz.jpg',
-          imgsrcLazy: 'https://lixuan.xyz/x-images/lixuan.xyz.lazy.jpg',
-          description_html: '创办于2014-01-10',
-          size: 4,
-        },
-        {
-          name: '摄影',
-          href: 'http://lixuan.xyz/photo/',
-          imgsrc: 'https://lixuan.xyz/x-images/photo.jpg',
-          imgsrcLazy: 'https://lixuan.xyz/x-images/photo.lazy.jpg',
-          description_html: '创办于2018年',
-          size: 3,
-        },
-        {
-          name: 'Mathematica问答社区',
-          href: 'https://mmaqa.com',
-          imgsrc: 'https://lixuan.xyz/x-images/mma.ooo.jpg',
-          imgsrcLazy: 'https://lixuan.xyz/x-images/mma.ooo.lazy.jpg',
-          description_html: '创办于2016-04-01',
-          size: 3,
-        },
-        {
-          name: '地图找工作',
-          href: 'https://lixuan.xyz/job/',
-          imgsrc: 'https://lixuan.xyz/x-images/job.map.jpg',
-          imgsrcLazy: 'https://lixuan.xyz/x-images/job.map.lazy.jpg',
-          description_html: '创办于2019-02-14',
-          size: 3,
-        },
-        // {
-        //   name: '数学之路',
-        //   href: 'http://shuxue6.com/',
-        //   imgsrc: 'https://lixuan.xyz/x-images/shuxue6.com.jpg',
-        //   imgsrcLazy: 'https://lixuan.xyz/x-images/shuxue6.com.lazy.jpg',
-        //   description_html: '创办于2011年，已经不再维护',
-        //   size: 3,
-        // },
+
       ],
     };
   },
@@ -147,6 +104,14 @@ export default {
     PlotCurves() {},
   },
   mounted() {
+    //加载数据
+    axios
+    .get("https://lixuan.xyz/home-data/get-json-string.php", { params: { file_path: 'home_myWeb.json' } })
+    .then((response) => {
+      this.myWeb =eval('(' + response.data + ')');                  // 页脚连接
+    });
+
+    // 绘制背景曲线
     // const canvas = document.getElementById('canvas');
     PlotCurves();
     // window.onresize = ResizeCanvas();

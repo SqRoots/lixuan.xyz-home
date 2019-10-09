@@ -41,7 +41,7 @@ export default {
   name: 'NavigationHead',
   data() {
     return {
-      logo: 'https://lixuan.xyz/x-images/logo.png',
+      logo: 'https://lixuan.xyz/home-image/logo.png',
     };
   },
 };

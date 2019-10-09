@@ -82,6 +82,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 
 export default {
   name: 'PageAboutProduct',
@@ -102,90 +103,17 @@ export default {
   },
   data() {
     return {
-      infomation: [
-        {
-          title: '主页',
-          url: 'https://lixuan.xyz',
-          color: 'grey lighten-3',
-          icon: 'fas fa-home',
-          content: [
-            '<a href="https://lixuan.xyz" target="_blank">lixuan.xyz</a> | <a href="https://lixuan.me" target="_blank">lixuan.me</a>',
-            '<b>内容</b>：原创资源导航 + 收藏的 网站',
-            '<b>日期</b>：主页于 2018-12-29 改版',
-            '<b>工具</b>：Vue，Vuetify，源码存放于：<a href="https://github.com/SqRoots/lixuan.xyz-home">Github</a>',
-          ],
-        },
-        {
-          title: '博客',
-          url: 'https://lixuan.xyz/blog/',
-          color: 'green lighten-3',
-          icon: 'fas fa-blog',
-          content: [
-            '<a href="https://lixuan.xyz/blog/" target="_blank">lixuan.xyz/blog</a>',
-            '<b>内容</b>：趣题 + Mathematica + 笔记',
-            '<b>日期</b>：创办于2014-01-10',
-            '<b>工具</b>：Wordpress',
-          ],
-        },
-        {
-          title: 'Mathematica问答社区',
-          url: 'https://mmaqa.com/',
-          color: 'yellow lighten-3',
-          icon: 'fas fa-atom',
-          content: [
-            '<a href="https://mmaqa.com" target="_blank">mmaqa.com</a> | <a href="http://mma.ooo" target="_blank">mma.ooo</a>',
-            '<b>内容</b>：Mathematica 交流社区',
-            '<b>日期</b>：创办于2016-04-01',
-            '<b>工具</b>：Wordpress + Question2Answer',
-          ],
-        },
-        {
-          title: '笔记',
-          url: 'https://lixuan.xyz/notes/mathematica/',
-          color: 'red lighten-3',
-          icon: 'fas fa-feather-alt',
-          content: [
-            '<a href="https://lixuan.xyz/notes/mathematica/" target="_blank">lixuan.xyz/notes/mathematica</a>',
-            '<b>内容</b>: Mathematica 笔记（未完）',
-            '<b>工具</b>: GitBoook',
-          ],
-        },
-        {
-          title: '摄影',
-          url: 'https://lixuan.xyz/photo/',
-          color: 'teal lighten-3',
-          icon: 'fas fa-camera',
-          content: [
-            '<a href="https://lixuan.xyz/photo/" target="_blank">lixuan.xyz/photo</a>',
-            '<b>内容</b>: 随拍，暂无特定主题',
-            '<b>工具</b>: Lychee | Canon 6D',
-          ],
-        },
-        {
-          title: '数学之路 (停止维护)',
-          url: 'http://shuxue6.com',
-          color: 'purple lighten-3',
-          icon: 'fas fa-superscript',
-          content: [
-            '<a href="http://shuxue6.com" target="_blank">shuxue6.com</a>',
-            '<b>内容</b>：交流数学问题 + 分享数学资源',
-            '<b>日期</b>：创办于 2011 年，已不再维护',
-            '<b>工具</b>：Discuz',
-          ],
-        },
-        {
-          title: 'MathType完全教程',
-          url: 'https://pan.baidu.com/s/1hqvjTNu',
-          color: 'light-green lighten-3',
-          icon: 'fas fa-book-open',
-          content: [
-            '<a href="https://pan.baidu.com/s/1hqvjTNu" target="_blank">下载《MathType完全教程》</a>',
-            '<b>内容</b>：MathType 入门教程',
-            '<b>日期</b>：完稿于 2013-10-30',
-          ],
-        },
-      ],
+      infomation: [],
     };
+  },
+
+  // 自成视图后，加载数据
+  mounted() {
+    axios
+    .get("https://lixuan.xyz/home-data/get-json-string.php", { params: { file_path: 'aboutProduct.json' } })
+    .then((response) => {
+      this.infomation = eval('(' + response.data + ')');
+    });
   },
 };
 </script>

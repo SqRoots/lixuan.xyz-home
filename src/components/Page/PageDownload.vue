@@ -35,6 +35,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 
 export default {
   name: 'DownloadPage',
@@ -42,12 +43,16 @@ export default {
   },
   data() {
     return {
-      description: [
-        '<b>程序</b>：<a href="https://pan.baidu.com/s/1pJ78TWB" target="_blank">【VB】【循环节计算器】</a>',
-        '<b>教程</b>：<a href="https://pan.baidu.com/s/1hqvjTNu" target="_blank">【2015】【MathType完全教程 第二版】</a>',
-        '<b>PPT</b>：<a href="https://pan.baidu.com/s/1QcM7_52kzVlwM38m8sNX6w" target="_blank">【2019】【保定学院】【一位学长的经验分享报告】.pptx</a>（提取密码 tmbs）',
-      ],
+      description: [],
     };
+  },
+  mounted() {
+    //加载数据
+    axios
+    .get("https://lixuan.xyz/home-data/get-json-string.php", { params: { file_path: 'download_description.json' } })
+    .then((response) => {
+      this.description =eval('(' + response.data + ')');                  // 页脚连接
+    });
   },
 };
 </script>

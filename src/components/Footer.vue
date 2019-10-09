@@ -75,6 +75,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 
 export default {
   name: 'Footer',
@@ -82,29 +83,17 @@ export default {
   },
   data() {
     return {
-      followme: [
-        {
-          icon: 'fab fa-facebook',
-          desc: 'Go to my Facebook',
-          link: 'https://www.facebook.com/lixuan.xyz',
-        },
-        {
-          icon: 'fab fa-linkedin',
-          desc: 'Go to my Linkedin',
-          link: 'https://www.linkedin.com/in/lixuanxyz/',
-        },
-        {
-          icon: 'fab fa-github',
-          desc: 'Go to my GitHub',
-          link: 'https://github.com/SqRoots',
-        },
-        {
-          icon: 'fab fa-zhihu',
-          desc: '访问我的知乎主页',
-          link: 'https://www.zhihu.com/people/lixuan.xyz/',
-        },
-      ],
+      followme: [],
     };
+  },
+
+  // 自成视图后，加载数据
+  mounted() {
+    axios
+    .get("https://lixuan.xyz/home-data/get-json-string.php", { params: { file_path: 'footer_link.json' } })
+    .then((response) => {
+      this.followme =eval('(' + response.data + ')');                  // 页脚连接
+    });
   },
 };
 </script>

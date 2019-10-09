@@ -35,6 +35,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 
 export default {
   name: 'PageAbout',
@@ -42,13 +43,17 @@ export default {
   },
   data() {
     return {
-      description: [
-        '<b>域名</b>：<a href="https://lixuan.xyz" target="_blank">lixuan.xyz</a> | <a href="https://lixuan.me" target="_blank">lixuan.me</a>',
-        '<b>日期</b>：主页于 2018-12-29 改版',
-        '<b>内容</b>：原创资源导航 + 收藏的 网站',
-        '<b>工具</b>：Vue，Vuetify，源码存放于：<a href="https://github.com/SqRoots/lixuan.xyz-home">Github</a>',
-      ],
+      description: [],
     };
+  },
+
+  // 自成视图后，加载数据
+  mounted() {
+    axios
+    .get("https://lixuan.xyz/home-data/get-json-string.php", { params: { file_path: 'about_description.json' } })
+    .then((response) => {
+      this.description =eval('(' + response.data + ')');                  // 页脚连接
+    });
   },
 };
 </script>

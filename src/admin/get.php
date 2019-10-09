@@ -16,6 +16,9 @@ switch ($_GET['catalog']) {
     case 'Motto':
         $sql = 'select * from motto';
         break;
+    case 'Download':
+        $sql = 'select * from download';
+        break;
 }
 
 $db = new SQLite3('collection.sqlite3');

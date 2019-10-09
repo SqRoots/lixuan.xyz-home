@@ -8,6 +8,7 @@
         <v-card-title class="headline blue darken-4 white--text">
           确定删除？
         </v-card-title>
+        
         <v-card-text>
           <v-container>
             <v-layout

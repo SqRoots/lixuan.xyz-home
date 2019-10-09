@@ -1,33 +1,30 @@
+
 <template>
-  <v-container>
-    <x-download />
-  </v-container>
+  <x-content />
 </template>
 
 <script>
-import PageDownload from '@/components/Page/PageDownload';
+  import PageCommon from '@/components/Page/PageCommon';
 
-export default {
-  name: 'PageDownload',
-  components: {
-    'x-download': PageDownload,
-  },
-};
+  export default {
+    components: { 'x-content': PageCommon },
+  };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1 {
-    text-align: center;
-  }
-  .v-card.theme--light {
-    border-radius: 10px;
-  }
-  .v-card__title {
-    padding: 8px 16px;
-  }
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 </style>

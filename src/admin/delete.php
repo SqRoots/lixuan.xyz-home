@@ -18,15 +18,18 @@ if (  is_user_logged_in() ) {
       case 'Motto':
           $table = 'motto';
           break;
+      case 'Download':
+          $table = 'download';
+          break;
   }
 
   $db = new SQLite3('collection.sqlite3');
-	$statement = $db->prepare("delete FROM {$table} WHERE id = :id;");
-	$statement->bindValue(':id', $_GET["id"]);
-	$result = $statement->execute();
-	var_dump($result);
-	$db->close();
-	echo 'id='.$_GET['id'].'的项目已删除！';
+        $statement = $db->prepare("delete FROM {$table} WHERE id = :id");
+        $statement->bindValue(':id', $_GET["id"]);
+        $result = $statement->execute();
+        //var_dump($result);
+        $db->close();
+  echo "id={$_GET['id']}的项目已删除！";
 } else {
   echo '【未登录】<br>';
   echo '仅管理员和作者有此权限！';

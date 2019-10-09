@@ -20,6 +20,9 @@ if ( is_user_logged_in() ) {
       case 'Motto':
           $table = 'motto';
           break;
+      case 'Download':
+          $table = 'download';
+          break;
   }
   // 连接数据库
   $db = new SQLite3('collection.sqlite3');
