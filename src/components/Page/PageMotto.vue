@@ -58,7 +58,7 @@
         >
           fas fa-trash
         </v-icon>
-        <span>&nbsp;</span>
+        <span style="margin-left:30px"></span>
         <v-icon
           @click="$_ShowCreateDialog()"
           v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"
@@ -66,7 +66,7 @@
         >
           fas fa-plus
         </v-icon>
-        <span>&nbsp;</span>
+        <span style="margin-left:30px"></span>
         <v-icon
           @click="$_ShowEditDialog(randomOneData)"
           v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"
@@ -76,8 +76,8 @@
         </v-icon>
       </v-flex>
 
-      <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;">
-      <!-- <v-flex> -->
+      <!-- <v-flex v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"> -->
+      <v-flex>
         <template>
           <v-card-title>
             <v-spacer></v-spacer>
@@ -104,6 +104,18 @@
               <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:160px">{{ props.item.type }}</td>
               <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:100px">{{ props.item.update_time }}</td>
               <td class="text-xs-center" @click="$_ShowEditDialog(props.item)" style="max-width:520px" v-html="props.item.content_html"></td>
+              <td class="text-xs-center" style="max-width:50px">
+                <v-btn
+                  icon
+                  small
+                  @click="$_ShowDeleteDialog(props.item)"
+                  v-if="$cookies.get(&quot;login&quot;)===&quot;login&quot;"
+                >
+                  <v-icon color="#550">
+                    delete_outline
+                  </v-icon>
+                </v-btn>
+              </td>
             </template>
           </v-data-table>
           <div class="text-xs-center pt-2">
@@ -131,6 +143,13 @@
       :q-show="valueEditItemDialog"
       :d-data="dataEditDialog"
     />
+    <!-- 删除项目 对话框 -->
+    <x-dialog-delete-item
+      @eHideDialog="valueShowDeleteItemDialog=false"
+      @eSucceed="$_reflashDeleteItem"
+      :q-show="valueShowDeleteItemDialog"
+      :d-data="dataDeleteDialog"
+    />
   </v-container>
 </template>
 
@@ -138,6 +157,7 @@
 import MottoDeleteDialog from '@/components/PublicComponents/MottoDeleteDialog';
 import MottoCreateDialog from '@/components/PublicComponents/MottoCreateDialog';
 import MottoEditDialog from '@/components/PublicComponents/MottoEditDialog';
+import DialogDeleteItem from '@/components/PublicComponents/DialogDeleteItem';
 import APIURL from '@/components/API';
 
 const axios = require('axios');
@@ -161,6 +181,7 @@ export default {
       dataDeleteDialog: {},              // 删除对话框-数据
       valueCreateItemDialog: false,      // 新建对话框-显示隐藏
       valueEditItemDialog: false,        // 编辑对话框-显示隐藏
+      valueShowDeleteItemDialog: false,  // 删除项目对话框-显示隐藏
       dataEditDialog: {},                // 编辑对话框-数据
       queryResult: '',                   // 查询结果
 
@@ -178,7 +199,8 @@ export default {
           { text: 'source', value: 'source' ,align: 'center'},
           { text: 'type', value: 'type' ,align: 'center'},
           { text: 'update_time', value: 'update_time' ,align: 'center'},
-          { text: 'content_html', value: 'content_html' ,align: 'center', sortable: false}
+          { text: 'content_html', value: 'content_html' ,align: 'center', sortable: false},
+          { text: 'operation', value: 'operation' ,align: 'center', sortable: false}
         ],
     };
   },
