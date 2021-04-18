@@ -10,8 +10,7 @@
       fill-height
     >
       <v-flex>
-        <h1>关于</h1>
-        <h4>主页简介</h4>
+        <h1>关于主页</h1>
       </v-flex>
     </v-layout>
 
@@ -25,8 +24,8 @@
     >
       <v-flex>
         <p
-          v-for="(desc, i) in description"
-          :key="i"
+          v-for="(desc, iiii) in description"
+          :key="iiii"
           v-html="desc"
         />
       </v-flex>

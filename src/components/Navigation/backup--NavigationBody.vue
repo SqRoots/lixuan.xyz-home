@@ -10,7 +10,7 @@
         v-model="item.model"
         :key="item.text"
         :prepend-icon="item.icon"
-        :append-icon="null"
+        :append-icon="item.children.length>0 ? (item.model ? keyboard_arrow_up : keyboard_arrow_left) : null"
         @click="item.model=!item.model"
       >
         <!-- 项目 - 列表 -->
@@ -25,6 +25,24 @@
           </v-list-tile-content>
         </v-list-tile>
 
+        <!-- 项目 - 子列表 -->
+        <v-list-tile
+          v-for="child in item.children"
+          :key="child.text"
+          :active-class="child.model"
+          @click="child.model=$_toggleSubtile();child.model"
+          class="navi-child"
+          :to="{ name: item.routerName, query: child.query }"
+        >
+          <v-list-tile-action v-if="child.icon">
+            <v-icon>{{ child.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ child.text }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list-group>
       <!-- 组 - 结束 -->
     </div>
@@ -102,7 +120,10 @@ export default {
           routerName: 'About',
           model: false,
           icon: 'info',
-          children: [],
+          children: [
+            { model: 'inactive', icon: 'widgets', text: '拙作', query: { category: '拙作' } },
+            { model: 'inactive', icon: 'functions', text: '个人简介', query: { category: '个人简介' } },
+          ],
         },
       ],
       routerName: this.$route.name,

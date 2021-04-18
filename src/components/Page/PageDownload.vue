@@ -39,8 +39,7 @@ const axios = require('axios');
 
 export default {
   name: 'DownloadPage',
-  components: {
-  },
+  components: {},
   data() {
     return {
       description: [],

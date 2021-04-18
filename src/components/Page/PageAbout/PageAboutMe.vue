@@ -10,8 +10,7 @@
       fill-height
     >
       <v-flex>
-        <h1>个人简介</h1>
-        <h4>个人信息+履历</h4>
+        <h1>关于我</h1>
       </v-flex>
 
       <!-- 基本信息 -->
@@ -48,9 +47,9 @@
                 >
                   <v-flex>
                     <p
-                      v-for="(p, i) in basicInfo"
-                      :key="i"
-                      v-html="p"
+                      v-for="(ppp, iii) in basicInfo"
+                      :key="iii"
+                      v-html="ppp"
                     />
                   </v-flex>
                 </v-layout>
@@ -81,9 +80,9 @@
                 >
                   <v-flex>
                     <p
-                      v-for="(p, i) in extendedInfo"
-                      :key="i"
-                      v-html="p"
+                      v-for="(ppp, iii) in extendedInfo"
+                      :key="iii"
+                      v-html="ppp"
                     />
                   </v-flex>
                 </v-layout>
@@ -115,9 +114,9 @@
             >
               <v-flex xs10>
                 <p
-                  v-for="(p, i) in resume"
-                  :key="i"
-                  v-html="p"
+                  v-for="(ppp, iii) in resume"
+                  :key="iii"
+                  v-html="ppp"
                 />
               </v-flex>
             </v-layout>
@@ -130,12 +129,12 @@
         <v-divider />
         <v-timeline>
           <v-timeline-item
-            v-for="(info,i) in infomation"
-            :key="i"
+            v-for="(info,iii) in infomation"
+            :key="iii"
             :color="info.color"
             fill-dot
-            :left="i%2==0"
-            :right="i%2==1"
+            :left="iii%2==0"
+            :right="iii%2==1"
             :icon="info.icon"
             small
           >
@@ -146,9 +145,9 @@
             />
             <!-- 信息卡 -->
             <v-card>
-              <v-card-title :class="`${info.color} ${i%2==0?'justify-end':'justify-start'}`">
+              <v-card-title :class="`${info.color} ${iii%2==0?'justify-end':'justify-start'}`">
                 <v-icon
-                  v-show="i%2!=0"
+                  v-show="iii%2!=0"
                   dark
                 >
                   {{ info.icon }}
@@ -162,7 +161,7 @@
                   </a>&nbsp;
                 </h3>
                 <v-icon
-                  v-show="i%2==0"
+                  v-show="iii%2==0"
                   dark
                 >
                   {{ info.icon }}
@@ -177,9 +176,9 @@
                 >
                   <v-flex xs10>
                     <p
-                      v-for="(p,i) in info.content"
-                      :key="i"
-                      v-html="p"
+                      v-for="(pppp,iiii) in info.content"
+                      :key="iiii"
+                      v-html="pppp"
                     />
                   </v-flex>
                 </v-layout>

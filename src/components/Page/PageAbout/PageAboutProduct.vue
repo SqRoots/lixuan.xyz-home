@@ -10,8 +10,7 @@
       fill-height
     >
       <v-flex>
-        <h1>拙作</h1>
-        <h4>一些原创产出</h4>
+        <h1>一些原创产出</h1>
       </v-flex>
     </v-layout>
 
@@ -54,9 +53,9 @@
             <!-- <v-divider/> -->
             <v-flex>
               <p
-                v-for="(p,i) in info.content"
-                :key="i"
-                v-html="p"
+                v-for="(pp,ii) in info.content"
+                :key="ii"
+                v-html="pp"
               />
             </v-flex>
             <sheet-footer>
