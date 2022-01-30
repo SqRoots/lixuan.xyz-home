@@ -62,7 +62,7 @@ export default {
   },
   data() {
     return {
-      miniVariant: true,
+      miniVariant: false,
       loginQ: $cookies.get('login')==='login'?'_blank':'_self',
     };
   },
