@@ -57,38 +57,6 @@
             </v-card>
           </v-flex>
 
-          <!-- 扩展信息 -->
-          <v-flex
-            xs12
-            sm12
-            md6
-            lg6
-            xl3
-          >
-            <v-card>
-              <v-card-title class="blue justify-center">
-                <h3 class="headline white--text font-weight-light">
-                  扩展信息
-                </h3>
-              </v-card-title>
-              <v-container>
-                <v-layout
-                  align-center
-                  justify-center
-                  column
-                  fill-height
-                >
-                  <v-flex>
-                    <p
-                      v-for="(ppp, iii) in extendedInfo"
-                      :key="iii"
-                      v-html="ppp"
-                    />
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-          </v-flex>
         </v-layout>
       </v-container>
 
@@ -125,47 +93,31 @@
       </v-flex>
 
       <!-- 时间轴履历 -->
-      <v-flex style="min-width:700px;">
+      <v-flex style="min-width:420px;">
         <v-divider />
-        <v-timeline>
+        <v-timeline dense clipped>
           <v-timeline-item
             v-for="(info,iii) in infomation"
             :key="iii"
             :color="info.color"
             fill-dot
-            :left="iii%2==0"
-            :right="iii%2==1"
             :icon="info.icon"
             small
           >
-            <span
-              slot="opposite"
-              :class="`title font-weight-bold ${info.color}--text`"
-              v-text="info.date"
-            />
             <!-- 信息卡 -->
             <v-card>
-              <v-card-title :class="`${info.color} ${iii%2==0?'justify-end':'justify-start'}`">
-                <v-icon
-                  v-show="iii%2!=0"
-                  dark
-                >
-                  {{ info.icon }}
-                </v-icon>
+              <v-card-title :class="`${info.color}`">
+                <v-icon dark class="text-lg-left">{{ info.icon }}</v-icon>
                 <h3 class="headline white--text font-weight-light">
                   &nbsp;<a
                     :href="info.url"
                     target="_blank"
                   >
                     {{ info.title }}
-                  </a>&nbsp;
+                  </a>
                 </h3>
-                <v-icon
-                  v-show="iii%2==0"
-                  dark
-                >
-                  {{ info.icon }}
-                </v-icon>
+                <v-spacer></v-spacer>
+                <span class="white--text font-weight-light" v-text="info.date"></span>
               </v-card-title>
               <v-container>
                 <v-layout
