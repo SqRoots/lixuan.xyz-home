@@ -2,7 +2,6 @@
   <v-footer
     app
     v-if="$route.name==='Home'"
-    dark
     height="auto"
     :inset="true"
   >
@@ -39,37 +38,22 @@
         class="justify-center brown--text"
         style="background-color:#ceccc4;"
       >
-        <v-tooltip top>
-          <v-btn
-            slot="activator"
-            class="mx-3 brown--text"
-            icon
-            target="_blank"
-          >
-            <v-icon size="16px">
-              far fa-envelope
-            </v-icon>
-          </v-btn>
-          <span>lixuan.xyz@gmail.com</span>
-        </v-tooltip>
+      <v-icon size="16px">
+        far fa-envelope
+      </v-icon>
+      <span style="padding-left:6px;">lixuan.xyz@gmail.com</span>
 
-        <span>&nbsp;</span>
 
-        <v-tooltip top>
-          <v-btn
-            slot="activator"
-            class="mx-3 brown--text"
-            icon
-            target="_blank"
-            href="http://beian.miit.gov.cn/"
-          >
-            <v-icon size="16px">
-              fas fa-shield-alt
-            </v-icon>
-          </v-btn>
-          <span>冀ICP备11017610号-3</span>
-        </v-tooltip>
+        <span style="padding: 0 20px 0 20px;">|</span>
+
+
+        <v-icon size="16px">
+          fas fa-shield-alt
+        </v-icon>
+        <span style="padding-left:6px;"><a href="https://beian.miit.gov.cn/" target="_blank" style="color:#795548;">冀ICP备11017610号-5</a></span>
+
       </v-card-actions>
+
     </v-card>
   </v-footer>
 </template>
